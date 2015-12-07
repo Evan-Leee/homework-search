@@ -68,12 +68,15 @@ div.content-foot {
 }
 
 button.add {
+    font-size: 15px;
+    width: 12%;
     position: absolute;
-    top: 0;
+    top: 15px;
     left: 10px;
 }
 
 #page.m-pagination{
+    font-size: 15px;
     position: absolute;
     top: 0;
     right: 10px;
