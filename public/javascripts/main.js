@@ -43,7 +43,7 @@ function listBookmarks(index, key, bookmarks) {
 
 
 $(document).ready(function () {
-  $.getJSON("data", function (temp) {
+  $.getJSON("bookmarks", function (temp) {
 
     listBookmarks(0, '', temp);
 
@@ -65,7 +65,7 @@ $(document).ready(function () {
     var key = $(this).val();
     var reg = new RegExp(key, "gim");
 
-    $.getJSON("data", function (data) {
+    $.getJSON("bookmarks", function (data) {
 
       var result = data.filter(function (elem) {
         return elem.title.search(reg) > 0;
@@ -87,7 +87,7 @@ $(document).ready(function () {
     var index = data.pageIndex * 10;
     var key = $("#search").val();
     var reg = new RegExp(key, "gim");
-    $.getJSON("data", function(data){
+    $.getJSON("bookmarks", function(data){
       var result = data.filter(function (elem) {
         return elem.title.search(reg) > 0;
       });
