@@ -26,7 +26,7 @@ function listBookmarks(index, key, bookmarks) {
     divEnd = "</span><span class='created'>Created @ " +
       timeFormat(bookmark.created) +
       "</span></div>" +
-      "<button class='delete' data-toggle='modal', data-target='#deletebookmarks'>删除</button>" +
+      "<button class='delete'>删除</button>" +
       "</div>";
 
     if (key !== '') {
@@ -35,10 +35,33 @@ function listBookmarks(index, key, bookmarks) {
       divMiddle = bookmark.title;
     }
 
+    if(bookmark.address){
+      divMiddle = "<a href=\""+ bookmark.address +"\">"+
+                  divMiddle+ "</a>"
+    }
+
     div = divStart + divMiddle + divEnd;
-    $(".content-middle").after(div);
+    $(".content-middle").append(div);
   }
 
+}
+
+function render(data){
+  var key = $("#search").val();
+  var reg = new RegExp(key, "gim");
+  var result = data.filter(function (elem) {
+    return elem.title.search(reg) >= 0;
+  });
+
+  if (!result.length)result = data;
+
+  listBookmarks(0,key,result);
+
+  var total = result.length ? result.length : data.length;
+
+  $(".content-head em").html(total);
+  $("#page").pagination('setPageIndex', 0);
+  $("#page").pagination('render', [total]);
 }
 
 
@@ -62,23 +85,8 @@ $(document).ready(function () {
 
   $("#search").bind("input", function () {
 
-    var key = $(this).val();
-    var reg = new RegExp(key, "gim");
-
     $.getJSON("bookmarks", function (data) {
-
-      var result = data.filter(function (elem) {
-        return elem.title.search(reg) > 0;
-      });
-
-      if (!result.length)result = data;
-      listBookmarks(0,key, result);
-
-      var total = result.length ? result.length : data.length;
-
-      $(".content-head em").html(total);
-      $("#page").pagination('setPageIndex', 0);
-      $("#page").pagination('render', [total]);
+      render(data);
     });
 
   });
@@ -89,7 +97,7 @@ $(document).ready(function () {
     var reg = new RegExp(key, "gim");
     $.getJSON("bookmarks", function(data){
       var result = data.filter(function (elem) {
-        return elem.title.search(reg) > 0;
+        return elem.title.search(reg) >= 0;
       });
 
       if (!result.length)result = data;
@@ -98,6 +106,36 @@ $(document).ready(function () {
 
   });
 
+  $("#add").on('click',function(){
+    if($("#bookmark").val() === '' || $("#address").val() === ''){
+      $(".error").css("display","block");
+    }else {
+      $.post("/bookmarks/add",
+        {
+          bookmark: $("#bookmark").val(),
+          address: $("#address").val()
+        },function(data){
+          render(data);
+        });
+      $("#addbookmarks").modal('hide');
+    }
+  });
+
+
+  $("div.content-middle").delegate('button.delete','click', function(){
+
+    if(confirm("确定要删除吗？")){
+      $.post("/bookmarks/delete",
+        {
+          title: $(this).prev().children(0)[0].innerHTML
+        },
+        function(data){
+          render(data);
+        }
+      );
+    }
+
+  });
 
 });
 

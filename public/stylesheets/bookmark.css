@@ -129,3 +129,9 @@ button#add{
     margin-top: 26px;
     width: 22%;
 }
+
+div.error {
+    margin-top: 15px;
+    color: red;
+    display: none;
+}

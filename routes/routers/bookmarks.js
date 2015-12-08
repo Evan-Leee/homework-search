@@ -5,6 +5,8 @@ var bookmarksController = new BookmarksController();
 
 router.get('/', bookmarksController.getBookmark);
 
+router.post('/add', bookmarksController.add);
 
+router.post('/delete', bookmarksController.delete);
 
 module.exports = router;
