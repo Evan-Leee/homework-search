@@ -44,8 +44,9 @@ function listBookmarks(index, key, bookmarks) {
 
 $(document).ready(function () {
   $.getJSON("data", function (temp) {
+
     listBookmarks(0, '', temp);
-console.log(temp);
+
     $("#page").pagination({
       pageSize: 10,
       pageBtnCount: 8,
