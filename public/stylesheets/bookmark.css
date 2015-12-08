@@ -24,7 +24,8 @@ div.content-middle {
 }
 
 div.result {
-    margin-top: 20px;
+    max-width: 1000px;
+    margin: 20px auto;
     position: relative;
     border: none;
     border-bottom: 1px dashed black;
@@ -40,11 +41,16 @@ div.result-content {
 }
 
 span.title {
+    width: 70%;
+    white-space:nowrap;
+    overflow:hidden;
+    text-overflow:ellipsis;
     font-size: 20px;
     position: absolute;
     top: 0;
     left: 0;
 }
+
 
 span.created {
     font-size: 14px;
@@ -93,4 +99,9 @@ button {
 
 button:hover{
     background: #eee;
+}
+
+
+em.high-light {
+    background: #54679D;
 }
