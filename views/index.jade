@@ -9,8 +9,38 @@ block content
             | 个结果
     .content-middle
     .content-foot
-        button.add 添加
+        button.add(type='button', data-toggle='modal', data-target='#addbookmarks') 添加
         #page.m-pagination
     script(src='javascripts/jquery-2.1.4.min.js')
     script(src='javascripts/mricode.pagination.js')
+    script(src='javascripts/bootstrap.min.js')
     script(src='javascripts/main.js')
+
+    #addbookmarks.modal.fade(role='dialog', aria-hidden='true')
+        .modal-dialog
+            .modal-content
+                .modal-header
+                    button.close(type='button', data-dismiss='modal') ×
+                    h4.modal-title 添加书签
+                .modal-body
+                    form.addbookmark(method='post', action='/bookmarks/add')
+                        .bookmarks
+                            | 书签名称：
+                            input#bookmark(name='bookmark', type='text')
+                        .address
+                            | 书签地址：
+                            input#address(name='bookmark', type='text')
+                        button#add(type='button') 确定
+
+
+    #deletebookmarks.modal.fade(role='dialog', aria-hidden='true')
+        .modal-dialog
+            .modal-content
+                .modal-header
+                    button.close(type='button', data-dismiss='modal') ×
+                    h4.modal-title 提示
+                .modal-body
+                    | 确定要删除该书签？
+                .modal-footer
+                    button(type='button', data-dismiss='modal') 取消
+                    button.del(type='button') 删除

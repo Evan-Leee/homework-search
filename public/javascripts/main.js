@@ -26,7 +26,7 @@ function listBookmarks(index, key, bookmarks) {
     divEnd = "</span><span class='created'>Created @ " +
       timeFormat(bookmark.created) +
       "</span></div>" +
-      "<button class='delete'>删除</button>" +
+      "<button class='delete' data-toggle='modal', data-target='#deletebookmarks'>删除</button>" +
       "</div>";
 
     if (key !== '') {
@@ -97,6 +97,7 @@ $(document).ready(function () {
     });
 
   });
+
 
 });
 
