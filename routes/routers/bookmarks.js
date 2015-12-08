@@ -1,9 +1,10 @@
 var express = require('express');
 var router = express.Router();
-var datajson = require('../../seeds/data.json');
+var BookmarksController = require('../../controllers/bookmarks-controller');
+var bookmarksController = new BookmarksController();
 
-router.get('/',function(req, res){
-  res.send(datajson);
-});
+router.get('/', bookmarksController.getBookmark);
+
+
 
 module.exports = router;
