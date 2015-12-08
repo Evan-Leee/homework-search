@@ -14,49 +14,87 @@ function timeFormat(time) {
 }
 
 
-function listBookmarks(key,bookmarks) {
+function listBookmarks(index, key, bookmarks) {
   $("div.result").remove();
   var reg = new RegExp(key, "gim");
 
-  bookmarks.forEach(function(bookmark){
-    var div,divStart,divMiddle,divEnd;
-    divStart = "<div class=\"result\"><span class=\"title\">";
-    divEnd = "</span><span class=\"created\">Created @ " +
+  for (var i = index; i < index + 10 && i < bookmarks.length; i++) {
+
+    var div, divStart, divMiddle, divEnd, bookmark;
+    bookmark = bookmarks[i];
+    divStart = "<div class='result'><div class='result-content'><span class='title' title=\"" + bookmark.title + "\">";
+    divEnd = "</span><span class='created'>Created @ " +
       timeFormat(bookmark.created) +
-      "</span>" +
-      "<hr>" +
+      "</span></div>" +
+      "<button class='delete'>删除</button>" +
       "</div>";
 
-    if(key !== ''){
-      if(bookmark.title.search(reg) > 0)
-        divMiddle = bookmark.title.replace(reg,"<em class='high-light'>$&</em>");
+    if (key !== '') {
+      divMiddle = bookmark.title.replace(reg, "<em class='high-light'>$&</em>");
     } else {
       divMiddle = bookmark.title;
     }
 
-    if(divMiddle){
-      div = divStart + divMiddle + divEnd;
-      $(".search-area").after(div);
-    }
-  });
+    div = divStart + divMiddle + divEnd;
+    $(".content-middle").after(div);
+  }
+
 }
 
-var result;
 
 $(document).ready(function () {
   $.getJSON("data", function (temp) {
-    result = temp;
-    listBookmarks('',temp);
+    listBookmarks(0, '', temp);
+console.log(temp);
+    $("#page").pagination({
+      pageSize: 10,
+      pageBtnCount: 8,
+      showFirstLastBtn: true,
+      firstBtnText: '首页',
+      lastBtnText: '尾页',
+      total: temp.length
+    });
+
+    $(".content-head em").html(temp.length);
   });
 
-  $(".search").bind("input", function () {
+
+  $("#search").bind("input", function () {
+
     var key = $(this).val();
-    listBookmarks(key,result);
+    var reg = new RegExp(key, "gim");
+
+    $.getJSON("data", function (data) {
+
+      var result = data.filter(function (elem) {
+        return elem.title.search(reg) > 0;
+      });
+
+      if (!result.length)result = data;
+      listBookmarks(0,key, result);
+
+      var total = result.length ? result.length : data.length;
+
+      $(".content-head em").html(total);
+      $("#page").pagination('setPageIndex', 0);
+      $("#page").pagination('render', [total]);
+    });
+
   });
 
-  $("#page").pagination({
-    pageSize: 10,
-    total: result.length
+  $("#page").on("pageClicked", function (event, data) {
+    var index = data.pageIndex * 10;
+    var key = $("#search").val();
+    var reg = new RegExp(key, "gim");
+    $.getJSON("data", function(data){
+      var result = data.filter(function (elem) {
+        return elem.title.search(reg) > 0;
+      });
+
+      if (!result.length)result = data;
+      listBookmarks(index, key, result);
+    });
+
   });
 
 });
