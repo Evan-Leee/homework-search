@@ -1,0 +1,96 @@
+body {
+    font-family: "Segoe UI", "Lucida Grande", Helvetica, Arial, "Microsoft YaHei", FreeSans, Arimo, "Droid Sans", "wenquanyi micro hei", "Hiragino Sans GB", "Hiragino Sans GB W3", FontAwesome, sans-serif;
+}
+
+div.content-head {
+    margin: 40px auto;
+    max-width: 1000px;
+    text-align: center;
+}
+
+#search {
+    width: 70%;
+    font-size: 30px;
+    vertical-align: middle;
+}
+
+div.content-head > span {
+
+}
+
+div.content-middle {
+    max-width: 1000px;
+    margin: 20px auto;
+}
+
+div.result {
+    margin-top: 20px;
+    position: relative;
+    border: none;
+    border-bottom: 1px dashed black;
+    padding: 20px;
+}
+
+div.result-content {
+    width: 85%;
+    display: inline-block;
+    position: absolute;
+    top: 0;
+    left: 0;
+}
+
+span.title {
+    font-size: 20px;
+    position: absolute;
+    top: 0;
+    left: 0;
+}
+
+span.created {
+    font-size: 14px;
+    position: absolute;
+    top: 15px;
+    right: 0;
+}
+
+button.delete {
+    font-size: 15px;
+    width: 12%;
+    position: absolute;
+    top: 5px;
+    right: 0;
+}
+
+div.content-foot {
+    margin: 0 auto;
+    max-width: 1000px;
+    position: relative;
+}
+
+button.add {
+    font-size: 15px;
+    width: 12%;
+    position: absolute;
+    top: 15px;
+    left: 10px;
+}
+
+#page.m-pagination{
+    font-size: 15px;
+    position: absolute;
+    top: 0;
+    right: 10px;
+}
+
+button {
+    border: 1px solid #ddd;
+    background: #fff;
+    border-radius: 3px;
+    padding: 6px 0;
+    cursor: pointer;
+    color: #888;
+}
+
+button:hover{
+    background: #eee;
+}
