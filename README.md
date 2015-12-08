@@ -5,7 +5,7 @@
 
   将项目克隆到本地
   
-  `git clone git@github.com:Evan-Leee/homework-search.git`
+  `git clone https://github.com/Evan-Leee/homework-search.git`
   
 ###step2:
  
