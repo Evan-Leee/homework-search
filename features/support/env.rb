@@ -4,6 +4,7 @@ require 'site_prism'
 require 'pry'
 
 require 'require_all'
+require_all 'lib'
 require 'rspec'
 
  Capybara.register_driver :selenium do |app|

@@ -53,11 +53,11 @@ function render(data){
     return elem.title.search(reg) >= 0;
   });
 
-  if (!result.length)result = data;
+  if (!result.length && key === '')result = data;
 
   listBookmarks(0,key,result);
 
-  var total = result.length ? result.length : data.length;
+  var total = result.length;
 
   $(".content-head em").html(total);
   $("#page").pagination('setPageIndex', 0);

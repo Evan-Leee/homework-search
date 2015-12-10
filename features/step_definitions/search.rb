@@ -1,11 +1,12 @@
 Given(/^Open the homepage$/) do
-  pending # Write code here that turns the phrase above into concrete actions
+  @homepage = HomePage.new
+  @homepage.load
 end
 
-Given(/^Search "([^"]*)"$/) do |arg1|
-  pending # Write code here that turns the phrase above into concrete actions
+Given(/^Search "([^"]*)"$/) do |search_content|
+   @homepage.search search_content
 end
 
-Given(/^Have (\d+) result$/) do |arg1|
-  pending # Write code here that turns the phrase above into concrete actions
+Given(/^Have (\d+) result$/) do |expect|
+  expect(@homepage.result).to eq expect.to_i
 end
