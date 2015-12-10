@@ -26,4 +26,14 @@
   ` localhost:3000 `
   
   查看网页
+
+##测试基本步骤：
+
+
+###step1:
+
+  在命令行输入
   
+  `cucumber features/`
+  
+  执行测试内容
